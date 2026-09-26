@@ -14,7 +14,8 @@ def pascal_triangle(n):
         n (int): The number of rows of the triangle.
 
     Returns:
-        list of list of int: Pascal's triangle rows, or an empty list if n <= 0.
+        list of list of int: Pascal's triangle rows,
+        or an empty list if n <= 0.
     """
     if n <= 0:
         return []
