@@ -50,7 +50,7 @@ if __name__ == "__main__":
             if line_count % 10 == 0:
                 print_stats(total_size, status_codes)
 
-        if line_count % 10 != 0:
+        if line_count == 0 or line_count % 10 != 0:
             print_stats(total_size, status_codes)
 
     except KeyboardInterrupt:
