@@ -13,6 +13,30 @@ def _gcd(a, b):
     return a
 
 
+def _bfs_change(coins, total):
+    """Finds minimum coins using BFS (coins sorted ascending)."""
+    visited = {total}
+    queue = [total]
+    steps = 0
+
+    while queue:
+        steps += 1
+        next_queue = []
+        for rem in queue:
+            for c in coins:
+                if c > rem:
+                    break
+                nxt = rem - c
+                if nxt == 0:
+                    return steps
+                if nxt not in visited:
+                    visited.add(nxt)
+                    next_queue.append(nxt)
+        queue = next_queue
+
+    return -1
+
+
 def makeChange(coins, total):
     """
     Determines the fewest number of coins needed to meet total.
@@ -43,7 +67,14 @@ def makeChange(coins, total):
         total //= g
         coins = [c // g for c in coins]
 
+    if total % coins[0] == 0:
+        return total // coins[0]
+
     n = len(coins)
+    if n > 15:
+        coins.reverse()
+        return _bfs_change(coins, total)
+
     best = total + 1
 
     def dfs(idx, rem, count):
